@@ -25,8 +25,7 @@ sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
 来自 <https://github.com/krystiankaluzny/Tanks> 
 
 
-2、
-1、ubuntu安装sdl2
+2、ubuntu安装sdl2
 https://www.linuxidc.com/Linux/2010-07/26965.htm
 SDL2的头文件在/usr/include/SDL2中
 
@@ -94,14 +93,12 @@ sudo apt-get install libsdl-ttf2.0-dev
 sudo apt-get install libsdl-gfx1.2-dev
 
 1、Ubuntu 18 下安装SDL2命令
-sudo apt-get install libsdl2-2.0
-sudo apt-get install libsdl2-dev
+apt-get install libsdl2-2.0
+apt-get install libsdl2-dev
 apt-get install libsdl2-mixer-dev
-sudo apt-get install libsdl2-image-dev
-sudo apt-get install libsdl2-ttf-dev
-sudo apt-get install libsdl2-gfx-dev
+apt-get install libsdl2-image-dev
+apt-get install libsdl2-ttf-dev
+apt-get install libsdl2-gfx-dev
 
-
-作者：right_33cb
 链接：https://www.jianshu.com/p/17ff0f40ec08
 
