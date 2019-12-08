@@ -26,7 +26,7 @@ Create a new orphan branch, named <new_branch>, started from <start_point> and s
 
 4、commit
 先git add，然后
-git commit -ammend -no-edit   //修正上一次的commit
+git commit --ammend --no-edit   //修正上一次的commit
 
 3、rm  //删除文件/文件夹
 git rm file_name
