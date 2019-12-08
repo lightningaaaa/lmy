@@ -93,7 +93,7 @@ sudo apt-get install libsdl-mixer1.2-dev
 sudo apt-get install libsdl-ttf2.0-dev
 sudo apt-get install libsdl-gfx1.2-dev
 
-1、
+1、Ubuntu 18 下安装SDL2命令
 sudo apt-get install libsdl2-2.0
 sudo apt-get install libsdl2-dev
 apt-get install libsdl2-mixer-dev
@@ -104,6 +104,4 @@ sudo apt-get install libsdl2-gfx-dev
 
 作者：right_33cb
 链接：https://www.jianshu.com/p/17ff0f40ec08
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
