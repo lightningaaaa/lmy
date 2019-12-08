@@ -33,11 +33,6 @@ https://blog.csdn.net/zjy900507/article/details/78717319
 
 https://www.cnblogs.com/hester/p/10327781.html
 
-6、VMware 启动虚拟机黑屏(Ubuntu)
-
-来自 <https://www.jianshu.com/p/33ed1de4c8d0> 
-
-https://blog.csdn.net/what_about_us/article/details/81207926  //多种黑屏的解决办法
 
 7、Vmware workstation中虚拟机提示获取所有权解决方法和原理
 
