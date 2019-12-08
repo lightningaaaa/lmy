@@ -5,6 +5,9 @@ git branch -r  //查看远端分支
 git branch -a   //查看本地和远端分支
 git branch -vv  //查看本地和远端分支的追踪关系以及当前的commitid
 
+git branch -D <name>   //delete the branch
+git branch -m <new_name>  //重命名当前分支为master（Rename the current branch to master）
+
 2、branch追踪
 （1）远端创建了分支，本地没有
 git checkout --track origin/branch_name
