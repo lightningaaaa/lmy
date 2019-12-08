@@ -23,3 +23,87 @@ On Debian based systems you can run (apt can by replaced with apt-get or apt
 sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
 
 来自 <https://github.com/krystiankaluzny/Tanks> 
+
+
+2、
+1、ubuntu安装sdl2
+https://www.linuxidc.com/Linux/2010-07/26965.htm
+SDL2的头文件在/usr/include/SDL2中
+
+2、
+https://blog.csdn.net/roisolitaire/article/details/44081573
+1 SDL2-2.0.3
+
+下载  http://www.libsdl.org/
+
+解压  
+
+配置安装环境（--prefix=/usr 安装到/usr下以便能直接调用） ./configure --prefix=/usr
+
+安装 make && make install
+
+
+
+2 freetype-2.3.11
+
+下载  http://downloads.sourceforge.net/freetype/freetype-2.5.5.tar.bz2
+
+解压
+
+安装配置   ./configure --prefix=/usr
+
+安装 make && make install
+
+3 SDL2_image-2.0.0
+
+下载 http://www.libsdl.org/projects/SDL_image/
+
+
+解压
+
+安装配置   ./configure --prefix=/usr
+
+安装 make && make install
+
+4 SDL2_gfx-1.0.1
+
+下载  http://cms.ferzkopp.net/index.php/software/13-sdl-gfx
+
+解压
+
+安装配置   ./configure --prefix=/us
+
+重新配置   autoreconf -ivf （如果没这不会报如下错误）
+
+libtool: Version mismatch error.  This is libtool 2.4.2 Debian-2.4.2-1ubuntu1, but the  
+libtool: definition of this LT_INIT comes from libtool 2.4.  
+libtool: You should recreate aclocal.m4 with macros from libtool 2.4.2 Debian-2.4.2-1ubuntu1  
+libtool: and run autoconf again.  
+make[5]: *** 1 Error 63  
+安装 make && make install
+
+
+3、SDL安装
+https://www.linuxidc.com/Linux/2010-07/26965.htm
+Ubuntu的新得立已经包含SDL库，所以通过几个简单的命令就可以安装，比windows还傻瓜！
+sudo apt-get install libsdl1.2-dev(比较大，10M左右)
+附加包：
+sudo apt-get install libsdl-image1.2-dev
+sudo apt-get install libsdl-mixer1.2-dev
+sudo apt-get install libsdl-ttf2.0-dev
+sudo apt-get install libsdl-gfx1.2-dev
+
+1、
+sudo apt-get install libsdl2-2.0
+sudo apt-get install libsdl2-dev
+apt-get install libsdl2-mixer-dev
+sudo apt-get install libsdl2-image-dev
+sudo apt-get install libsdl2-ttf-dev
+sudo apt-get install libsdl2-gfx-dev
+
+
+作者：right_33cb
+链接：https://www.jianshu.com/p/17ff0f40ec08
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
