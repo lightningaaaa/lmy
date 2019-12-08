@@ -5,3 +5,7 @@ root用户切换到普通用户有以下三种：
 2、直接输入exit，
 3、Ctrl+D组合键退出
 https://blog.csdn.net/qq_37462176/article/details/81978214
+
+1、切换root
+Sudo passwd root   //设置root密码
+Su  然后输入密码可以进入root模式
