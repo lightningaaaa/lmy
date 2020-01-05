@@ -10,7 +10,7 @@ http://wiki.wesnoth.org/Play/zh-Hans
 4、源代码编译方法
 https://wiki.wesnoth.org/CompilingWesnoth
 （1）安装依赖
-sudo apt build-dep wesnoth-1.12
+sudo apt build-dep wesnoth-1.12  //如果是1.14版本，可以尝试修改为1.14
 sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libboost-all-dev libvorbis-dev libcairo2-dev libpango1.0-dev libssl-dev libreadline-dev cmake make scons pkgconf
 （2）可以使用scons或者cmake进行编译，如下使用scons
 在安装文件的根目录

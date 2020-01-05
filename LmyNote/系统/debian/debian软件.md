@@ -62,7 +62,7 @@ deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free co
 export PATH=$PATH:/usr/local/....(你的环境变量路径)
 永久添加环境变量，步骤如下：
 #在~/.bashrc文件末尾添加如下：
-PATH = $PATH:/usr/local/...(待添加路径)
+PATH = $PATH:/usr/local/...(待添加路径)     //debian的/usr/sbin默认不在环境变量中，需要添加
 export PATH
 保存；
 source ~/.bashrc
@@ -70,3 +70,6 @@ echo $PATH
 
 https://www.cnblogs.com/xielisen/p/10605360.html
 
+
+9、debian 卸载软件的三种方法
+https://blog.csdn.net/ykf173/article/details/88940674
