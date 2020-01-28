@@ -33,3 +33,5 @@ do_gameloop
                     } catch () {
 
                     }
+        //loading
+        if(game->is_loading())

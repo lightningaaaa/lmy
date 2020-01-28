@@ -6,12 +6,9 @@ http://tieba.baidu.com/p/5079766050
 
 2、debian ctrl+alt+t无法启动终端解决办法
 https://blog.csdn.net/jiaqi_327/article/details/21619193
-解决办法是打开系统设置->键盘->快捷键->自定义快捷键，自己添加快捷键
-
+解决办法是打开系统设置->键盘->快捷键->自定义快捷键，自己添加快捷键（拖到最下面点击+号）
 名称：terminal（可自己定义）
-
-命令：gnome-terminal（我的桌面环境为gnome，其他桌面环境只需要修改gnome为其他桌面环境名字即可）
-
+命令：gnome-terminal（debian10的默认）（其他桌面环境需要修改gnome为其他桌面环境名字即可）
 新建后设置这一项的快捷键为Ctrl+Alt+T即可使用快捷键打开终端
 
 3、打开terminal时转圈圈然后自动关闭

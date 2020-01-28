@@ -41,13 +41,4 @@ https://blog.csdn.net/yangym2002/article/details/74640415
 解决方法：执行sudo dpkg-reconfigure dash 命令，将dash设置为No。
 再次查看：查看sh的链接已经修改为bash了。
 
-7、解决/bin/sh^M: bad interpreter: No such file or directory
-https://blog.csdn.net/sjt19910311/article/details/87966881
 
-用vim打开有问题的shell脚本，输入
-
-:set fileformat=unix
-1
-然后保存
-
-:wq!
