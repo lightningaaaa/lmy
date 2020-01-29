@@ -233,10 +233,7 @@ void map_context::load_scenario(const config& game_config) //在加载战役和�
         	lmap lmap_;        //改变umap_
     }
 
-（3）
-team_builder::place_units
-    unit_creator::add_unit //加载自定义地图时会调用到，其他未知
-
+（3）创建unit
 调用栈
 (gdb) bt
 #0  0x00005555560b31c9 in unit_creator::add_unit(config const&, vconfig const*)
@@ -271,3 +268,29 @@ void) const (__closure=0x55555dee0678)
     at pthread_create.c:486
 #12 0x00007ffff49714cf in clone ()
     at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95
+
+（3.1）unit_configs_信息填充
+game_state::init
+    team_builder::build_team_stage_one() //阶段1，准备创建单位等处理
+        //initialize the context variables and flags, find relevant tags, set up everything
+        init();
+        //find out the correct qty of gold and handle gold carryover.
+        gold();
+        //create a new instance of team and push it to back of resources::gameboard->teams() vector
+        new_team();
+        //set team objectives if necessary
+        objectives();
+        // If the game state specifies additional units that can be recruited by the player, add them.
+        previous_recruits();
+        //place leader
+        leader();
+        //prepare units, populate obvious recall lists elements
+        prepare_units();
+            for (const config &su : side_cfg_.child_range("unit")) //side的子目录中的unit
+                team_builder::handle_unit
+                    unit_configs_.push_back(&u); //unit_configs_信息填充
+        build_team_stage_two //阶段二，创建单位
+            team_builder::build_team_stage_two
+                team_builder::place_units
+                    for (const config *u : unit_configs_) //unit_configs_中存了所有unit信息？后面分析unit_configs_信息填充
+                        unit_creator::add_unit //加载自定义地图时会调用到，其他未知
