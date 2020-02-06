@@ -67,7 +67,10 @@ game_state::init
             team_builder::build_team_stage_two
                 team_builder::place_units
                     for (const config *u : unit_configs_)  //unit_configs_中存了所有unit信息？后面分析unit_configs_信息填充
-                        unit_creator::add_unit             //创建unit，加载自定义地图时会调用到，src\actions\unit_creator.cpp 文件
+                        unit_creator::add_unit             //创建unit，加载自定义地图时会调用到，  src\actions\unit_creator.cpp 文件
+                        if ( !recall_list_element )
+                    		unit_ptr new_unit = unit::create(temp_cfg, true, vcfg);
+                                unit::init //获取了单位的详细信息
 
 （3.2）调用栈
 (gdb) bt
@@ -103,3 +106,19 @@ void) const (__closure=0x55555dee0678)
     at pthread_create.c:486
 #12 0x00007ffff49714cf in clone ()
     at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95
+
+4、debug模式新建单位的调用栈
+SYNCED_COMMAND_HANDLER_FUNCTION(debug_create_unit, child,  use_undo, /*show*/, error_handler)
+    // Create the unit.
+	unit_ptr created = unit::create(*u_type, side_num, true, gender);
+    // Add the unit to the board.
+	std::tie(unit_it, std::ignore) = resources::gameboard->units().replace(loc, created);
+
+(gdb) bt
+#0  0x0000555555b8f830 in unit::init(unit_type const&, int, bool, unit_race::GENDER)
+    (this=0x55555e540720, u_type=..., side=1, real_unit=true, gender=unit_race::MALE) at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/units/unit.cpp:694
+#1  0x0000555555aac166 in unit::create(unit_type const&, int, bool, unit_race::GENDER) (t=..., side=1, real_unit=true, gender=unit_race::MALE)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/units/unit.hpp:138
+#2  0x0000555555aa9394 in synced_command_func_debug_create_unit(config const&, bool, bool, synced_command::error_handler_function)
+    (child=..., use_undo=true, error_handler=...)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/synced_commands.cpp:530
