@@ -27,7 +27,11 @@ class game_board : public display_context
 	{
 		return units_;
 	}
+
+    unit_map::iterator find_unit(const map_location & loc) { return units_.find(loc); } //根据位置找单位？不知道哪个流程调用
 }
+2、
+如下接口在读取地图和debug增加单位时不会被调用。unit_map::add
 
 2、
 文件路径：src\editor\map\map_context.cpp
