@@ -111,8 +111,18 @@ void) const (__closure=0x55555dee0678)
 SYNCED_COMMAND_HANDLER_FUNCTION(debug_create_unit, child,  use_undo, /*show*/, error_handler)
     // Create the unit.
 	unit_ptr created = unit::create(*u_type, side_num, true, gender);
+    
+    unit_map::unit_iterator unit_it;
     // Add the unit to the board.
 	std::tie(unit_it, std::ignore) = resources::gameboard->units().replace(loc, created);
+    unit_map::replace //replace的实现
+        self_check();
+        p->set_location(l);
+        erase(l);
+        return insert(p);
+    unit_display::unit_recruited(loc);  //显示单位
+
+
 
 (gdb) bt
 #0  0x0000555555b8f830 in unit::init(unit_type const&, int, bool, unit_race::GENDER)
