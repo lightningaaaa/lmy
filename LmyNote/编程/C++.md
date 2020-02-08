@@ -28,3 +28,19 @@ std::tie会将变量的引用整合成一个tuple，从而实现批量赋值。
     int i; double d; string s;
     tie(i, d, s) = t3;
 
+4、boost::intrusive_ptr原理介绍
+https://www.cnblogs.com/edwardlost/archive/2011/02/17/1957019.html
+https://blog.csdn.net/harbinzju/article/details/6754646
+在以下情况时使用 intrusive_ptr ：
+你需要把 this 当作智能指针来使用。
+已有代码使用或提供了插入式的引用计数。
+智能指针的大小必须与裸指针的大小相等。
+
+5、dynamic_cast
+const unit* u = dynamic_cast<const unit*>(base_u);
+https://baike.baidu.com/item/dynamic_cast/4473047?fr=aladdin
+dynamic_cast是将一个基类对象指针（或引用）转换到继承类指针，dynamic_cast会根据基类指针是否真正指向继承类指针来做相应处理。
+
+6、C++ | vector 类中的 push_back( ) 函数 、（添加和删除函数）
+https://blog.csdn.net/sherlock_homles/article/details/82833414
+push_back函数在vector的最后添加元素，会重新申请大小

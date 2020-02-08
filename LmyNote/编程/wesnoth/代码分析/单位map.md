@@ -60,21 +60,26 @@ game_state::init
         leader();
         //prepare units, populate obvious recall lists elements
         prepare_units();
-            for (const config &su : side_cfg_.child_range("unit")) //side的子目录中的unit
+            for (const config &su : side_cfg_.child_range("unit"))  //side的子目录中的unit
                 team_builder::handle_unit
-                    unit_configs_.push_back(&u); //unit_configs_信息填充
+                    unit_configs_.push_back(&u);                    //unit_configs_信息填充
         build_team_stage_two    //创建单位，阶段二
             team_builder::build_team_stage_two
                 team_builder::place_units
-                    for (const config *u : unit_configs_)  //unit_configs_中存了所有unit信息？后面分析unit_configs_信息填充
-                        unit_creator::add_unit             //创建unit，加载自定义地图时会调用到，  src\actions\unit_creator.cpp 文件
-
-                        if ( !recall_list_element )
-                    		unit_ptr new_unit = unit::create(temp_cfg, true, vcfg);
-                                unit::init //获取了单位的详细信息
-                            if ( loc.valid() ) {
-			                    //add the new unit to map
-			                    board_->units().replace(loc, new_unit); //加入unit_map
+                    for (const config *u : unit_configs_)  //unit_configs_ 中存了所有unit信息？后面分析unit_configs_信息填充
+                        unit_creator::add_unit             //创建unit，unit_creator.cpp 文件
+                            if ( !recall_list_element ) {
+                                unit_ptr new_unit = unit::create(temp_cfg, true, vcfg);
+                                    unit::init              //通过cfg获取了单位的详细信息，填充单位信息
+                                map_location loc = find_location(temp_cfg, new_unit.get()); //获取位置
+                                if ( loc.valid() ) {
+                                    //add the new unit to map
+                                    board_->units().replace(loc, new_unit); //加入unit_map
+                                        self_check();
+                                        p->set_location(l);
+                                        erase(l);
+                                        return insert(p);                   //插入unit
+                                }
                             }
 
 （3.2）读取地图新建单位调用栈，创建单位和加入unit_map函数unit_map::insert
