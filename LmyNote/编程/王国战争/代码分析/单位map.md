@@ -14,7 +14,10 @@ unit_map &unit_map::operator=(const unit_map &that)  //重载=号调用add？
     }
 
 2、artifical_ 变量设置
-game_state::build_team  //在韦诺之战中貌似分拆在 class team_builder 中的build_team_stage_one 和 build_team_stage_two
+（2.1）
+game_state::build_team
+（2.2）
+game_state::build_team  //在韦诺之战中貌似分拆在 class team_builder 中的build_team_stage_one等
     unit_fields_t* fields = (unit_fields_t*)(mem + offset);  //获取fields信息
     unit* new_unit;
     if (fields->artifical_) {
