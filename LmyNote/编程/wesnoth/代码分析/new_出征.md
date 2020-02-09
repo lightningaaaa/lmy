@@ -1,0 +1,71 @@
+1、
+出征分两种情况：AI出征、玩家出征。
+不论是AI还是玩家，成功时都由unit_map::move处理。
+AI出征失败由actions.cpp中的move_unit中expedite_release处理。
+玩家出征失败（玩家主动取消）由mouse_events.cpp中处理（expediting_）。
+
+2、unit_map //其中包含出征
+http://www.freeors.com/bbs/forum.php?mod=viewthread&tid=20344&extra=page%3D4
+
+3、王国战争的处理
+王国战争中出征的关键字Expedite
+menu_handler::expedite
+
+4、debug模式创建单位
+bool command_executor::run_queued_commands()
+	std::vector<queued_command> commands = filter_command_queue();
+    ......
+    hotkey_handler::do_execute_command
+        command_executor::do_execute_command
+            switch(cmd.id)
+            case HOTKEY_CREATE_UNIT:
+                create_unit();
+                    menu_handler::create_unit(mouse_handler& mousehandler)
+                break;
+
+存入事件
+void command_executor::queue_command(const SDL_Event& event, int index)
+    const hotkey_command& command = hotkey::get_hotkey_command(hk->get_command());
+
+std::array<hotkey_command_temp, HOTKEY_NULL - 1> master_hotkey_list {{
+
+调用栈
+(gdb) bt
+#0  0x0000555555ff86a1 in events::menu_handler::create_unit(events::mouse_handler&) (this=0x7fffffffbe88, mousehandler=...)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/menu_events.cpp:732
+#1  0x000055555624aba7 in playsingle_controller::hotkey_handler::create_unit() (this=0x555557f58f30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/hotkey_handler_sp.cpp:83
+#2  0x0000555556494983 in hotkey::command_executor::do_execute_command(hotkey::hotkey_command const&, int, bool, bool)
+    (this=0x555557f58f30, cmd=..., press=true, release=false)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:194
+#3  0x0000555556247513 in play_controller::hotkey_handler::do_execute_command(hotkey::hotkey_command const&, int, bool, bool)
+    (this=0x555557f58f30, cmd=..., index=-1, press=true, release=false)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/hotkey_handler.cpp:267
+#4  hotkey::command_executor::execute_command_wrap
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:614
+#5  hotkey::command_executor::run_queued_commands()
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:692
+#6  hotkey::run_events(hotkey::command_executor*)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:570
+#7  controller_base::process(events::pump_info&) (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/controller_base.cpp:254
+#8  0x000055555646691b in events::pump() () at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/events.cpp:753
+#9  0x0000555555d3a403 in controller_base::play_slice(bool) (this=0x7fffffffbc30, is_delay_enabled=true)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/controller_base.cpp:358
+#10 0x000055555604b191 in playmp_controller::play_slice(bool) (this=0x7fffffffbc30, is_delay_enabled=true)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playmp_controller.cpp:457
+#11 0x0000555556043548 in play_controller::play_slice_catch() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/play_controller.cpp:1070
+#12 0x0000555556049681 in playmp_controller::play_human_turn() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playmp_controller.cpp:143
+#13 0x000055555604fb8d in playsingle_controller::play_side_impl() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playsingle_controller.cpp:391
+#14 0x0000555556043c70 in play_controller::play_side() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/play_controller.cpp:1161
+#15 0x0000555556043fc4 in play_controller::play_turn() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/play_controller.cpp:1202
+#16 0x000055555604e13e in playsingle_controller::play_scenario_main_loop() (this=0x7fffffffbc30)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playsingle_controller.cpp:174
+#17 0x000055555604ea65 in playsingle_controller::play_scenario(config const&) (this=0x7fffffffbc30, level=...)
+    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playsingle_controller.cpp:271
+#18 0x0000555555e92de2 in campaign_controller::playmp_scenario(end_level_data&) (this=0x7fffffffc5d0, end_level=...)
