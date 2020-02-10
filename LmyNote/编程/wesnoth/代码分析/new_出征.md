@@ -14,19 +14,42 @@ menu_handler::expedite
 4、debug模式创建单位
 bool command_executor::run_queued_commands()
 	std::vector<queued_command> commands = filter_command_queue();
+        for(const queued_command& cmd : command_queue_) {  //遍历 command_queue_ 变量
+        }
     ......
     hotkey_handler::do_execute_command
         command_executor::do_execute_command
             switch(cmd.id)
-            case HOTKEY_CREATE_UNIT:
+            case HOTKEY_ENDTURN: //结束回合
+			    end_turn();
+			    break;
+            case HOTKEY_TERRAIN_DESCRIPTION://地形描述
+			    terrain_description();
+			    break;
+		    case HOTKEY_UNIT_DESCRIPTION://单位描述
+			    unit_description();
+			    break;
+            case HOTKEY_RENAME_UNIT://重命名单位
+			    rename_unit();
+			    break;
+            case HOTKEY_CREATE_UNIT:  //case 事件类型
                 create_unit();
                     menu_handler::create_unit(mouse_handler& mousehandler)
                 break;
+            case HOTKEY_DESELECT_HEX: //在地图上点击 右键
+			    deselect_hex();       //play_controller::hotkey_handler::deselect_hex 
+                        //at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/hotkey_handler.cpp:135
+                    mouse_handler_.deselect_hex();
+                        select_hex(map_location(), true);
+                            if(selected_hex_.valid() && unit.valid() && !unit->get_hidden()) //左键选中单位？
 
-存入事件
+
+event存入，变量成员std::vector<queued_command> command_queue_;
 void command_executor::queue_command(const SDL_Event& event, int index)
     const hotkey_command& command = hotkey::get_hotkey_command(hk->get_command());
+    command_queue_.emplace_back(command, index, press, release);  //存入 command_queue_ 变量
 
+貌似是事件数组
 std::array<hotkey_command_temp, HOTKEY_NULL - 1> master_hotkey_list {{
 
 调用栈
