@@ -17,31 +17,46 @@ bool command_executor::run_queued_commands()
         for(const queued_command& cmd : command_queue_) {  //遍历 command_queue_ 变量
         }
     ......
-    hotkey_handler::do_execute_command
-        command_executor::do_execute_command
-            switch(cmd.id)
-            case HOTKEY_ENDTURN: //结束回合
-			    end_turn();
-			    break;
-            case HOTKEY_TERRAIN_DESCRIPTION://地形描述
-			    terrain_description();
-			    break;
-		    case HOTKEY_UNIT_DESCRIPTION://单位描述
-			    unit_description();
-			    break;
-            case HOTKEY_RENAME_UNIT://重命名单位
-			    rename_unit();
-			    break;
-            case HOTKEY_CREATE_UNIT:  //case 事件类型
-                create_unit();
-                    menu_handler::create_unit(mouse_handler& mousehandler)
-                break;
-            case HOTKEY_DESELECT_HEX: //在地图上点击 右键
-			    deselect_hex();       //play_controller::hotkey_handler::deselect_hex 
-                        //at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/hotkey_handler.cpp:135
-                    mouse_handler_.deselect_hex();
-                        select_hex(map_location(), true);
-                            if(selected_hex_.valid() && unit.valid() && !unit->get_hidden()) //左键选中单位？
+    hotkey::command_executor::execute_command_wrap
+        hotkey_handler::do_execute_command
+            command_executor::do_execute_command
+                switch(cmd.id)
+                case HOTKEY_ENDTURN: //结束回合
+                    end_turn();
+                    break;
+                case HOTKEY_TERRAIN_DESCRIPTION://地形描述
+                    terrain_description();
+                    break;
+                case HOTKEY_UNIT_DESCRIPTION://单位描述
+                    unit_description();
+                    play_controller::hotkey_handler::unit_description // at /src/hotkey/hotkey_handler.cpp:190
+                        menu_handler_.unit_description();
+                            const unit_map::const_iterator un = current_unit();
+                            if(un != units().end()) {
+                                help::show_unit_description(*un);  //显示单位对应的介绍
+                            }
+                    break;
+                case HOTKEY_RENAME_UNIT://重命名单位
+                    rename_unit();
+                    break;
+                case HOTKEY_LABEL_TERRAIN: //设置标签
+                    label_terrain(false);
+                    break;
+                case HOTKEY_CLEAR_LABELS: //清除标签
+                    clear_labels();
+                    break;
+                case HOTKEY_CREATE_UNIT:  //dbg创建单位
+                    create_unit();
+                        menu_handler::create_unit(mouse_handler& mousehandler)
+                    break;
+                case HOTKEY_DESELECT_HEX: //在地图上点击 右键
+                    deselect_hex(); //play_controller::hotkey_handler::deselect_hex at /src/hotkey/hotkey_handler.cpp:135
+                        mouse_handler_.deselect_hex();
+                            select_hex(map_location(), true);  //at mouse_events.cpp:1034
+                                if(selected_hex_.valid() && unit.valid() && !unit->get_hidden())
+                case HOTKEY_SELECT_AND_ACTION: //左键选中单位
+                    select_and_action();
+                    break;
 
 
 event存入，变量成员std::vector<queued_command> command_queue_;
@@ -65,7 +80,7 @@ std::array<hotkey_command_temp, HOTKEY_NULL - 1> master_hotkey_list {{
     (this=0x555557f58f30, cmd=..., index=-1, press=true, release=false)
     at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/hotkey_handler.cpp:267
 #4  hotkey::command_executor::execute_command_wrap
-    at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:614
+    at /src/hotkey/command_executor.cpp:614
 #5  hotkey::command_executor::run_queued_commands()
     at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/hotkey/command_executor.cpp:692
 #6  hotkey::run_events(hotkey::command_executor*)
@@ -92,3 +107,16 @@ std::array<hotkey_command_temp, HOTKEY_NULL - 1> master_hotkey_list {{
 #17 0x000055555604ea65 in playsingle_controller::play_scenario(config const&) (this=0x7fffffffbc30, level=...)
     at /mnt/hgfs/MyCode_ShareVm/wesnoth_1_14_9/src/playsingle_controller.cpp:271
 #18 0x0000555555e92de2 in campaign_controller::playmp_scenario(end_level_data&) (this=0x7fffffffc5d0, end_level=...)
+
+
+5、尝试增加快捷键 -- 出征
+data\core\hotkeys.cfg
+[hotkey]
+    command=reside
+    key=a
+    alt=yes
+[/hotkey]
+
+增加宏值
+src\hotkey\hotkey_command.hpp
+HOTKEY_CITY_RESIDE,
