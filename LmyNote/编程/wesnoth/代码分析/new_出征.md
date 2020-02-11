@@ -54,7 +54,8 @@ bool command_executor::run_queued_commands()
                     unit_description();
                     play_controller::hotkey_handler::unit_description // at /src/hotkey/hotkey_handler.cpp:190
                         menu_handler_.unit_description();
-                            const unit_map::const_iterator un = current_unit();
+                            const unit_map::const_iterator un = current_unit(); //获取当前unit
+                                unit_map::iterator res = board().find_visible_unit(mousehandler.get_last_hex(), teams()[gui_->viewing_team()], see_all);
                             if(un != units().end()) {
                                 help::show_unit_description(*un);  //显示单位对应的介绍
                             }
@@ -136,6 +137,7 @@ std::array<hotkey_command_temp, HOTKEY_NULL - 1> master_hotkey_list {{
 
 
 5、尝试增加快捷键 -- 出征
+（5.1）
 data\core\hotkeys.cfg
 [hotkey]
     command=expedite
@@ -143,6 +145,11 @@ data\core\hotkeys.cfg
     alt=yes
 [/hotkey]
 
-增加宏值
+（5.2）增加宏值
 src\hotkey\hotkey_command.hpp
 HOTKEY_CITY_EXPEDITE,
+
+（5.3）按键是否有效的判断
+play_controller::hotkey_handler::can_execute_command
+    case hotkey::HOTKEY_CITY_EXPEDITE:
+		return menu_handler_.current_unit()->is_city();
