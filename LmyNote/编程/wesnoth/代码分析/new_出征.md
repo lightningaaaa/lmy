@@ -61,8 +61,12 @@ bool command_executor::run_queued_commands()
                             }
                     break;
                 case HOTKEY_CITY_EXPEDITE: //新建出征 ---- 新增
-                    expedite();
+                    expedite(); //src/hotkey/hotkey_handler_sp.cpp
+                        menu_handler::expedite
 			        break;
+                case HOTKEY_RECRUIT:      //征招
+                    recruit(); //src/hotkey/hotkey_handler_sp.cpp
+                    break;
                 case HOTKEY_RENAME_UNIT://重命名单位
                     rename_unit();
                     break;
@@ -153,3 +157,37 @@ HOTKEY_CITY_EXPEDITE,
 play_controller::hotkey_handler::can_execute_command
     case hotkey::HOTKEY_CITY_EXPEDITE:
 		return menu_handler_.current_unit()->is_city();
+
+6、新增的出征处理函数
+menu_handler::expedite(int side_num, const map_location &last_hex) //在recruit函数中last_hex是鼠标最后所在位置，但新增的是初始值
+        do_expedite(sample_units[index]->id(), side_num, recruit_hex);
+        msg = actions::find_recruit_location(side_num, loc, recruited_from, name);     //会修改loc为被招募单位的坐标
+        if(!pc_.get_whiteboard() || !pc_.get_whiteboard()->save_recruit(name, side_num, loc))
+            current_team.set_action_bonus_count(1 + current_team.action_bonus_count());
+            synced_context::run_and_throw("expedite", replay_helper::get_recruit(u_type->id(), loc, recruited_from));  //数据不正常会抛出SIGABRT，其中的loc参数是被招募单位的坐标。第二个参数返回config类型招募信息
+                synced_context::run
+                    synced_command::map::iterator it = synced_command::registry().find(commandname);//获取注册的handle，字符关键字"recruit"
+                    if(it == synced_command::registry().end()) {
+                        error_handler("commandname [" +commandname +"] not found", true);
+                    }
+                    else {
+                        bool success = it->second(data, use_undo, show, error_handler); //数据不正常抛出SIGABRT
+                        //关键字"recruit"对应的处理函数 synced_command_func_expedite ，
+                        //代码中 SYNCED_COMMAND_HANDLER_FUNCTION(expedite ...)
+                            map_location loc(child, resources::gamedata);            //会新建loc然后初始化
+                                map_location::map_location(const config& cfg, const variable_set *variables) //多态函数
+                                    std::string xs = cfg["x"], ys = cfg["y"];  //在正常的招募中能提取出有效位置信息
+	                        map_location from(child.child_or_empty("from"), resources::gamedata); //新建from
+                            if ( !from.valid() )
+                                error_handler //抛出异常
+                            actions::recruit_unit //数据不正常会抛出异常
+                                unit::create(u_type, side_num, true);
+                                place_expedite  //数据不正常会抛出异常
+                                    std::tie(new_unit_itor, success) = resources::gameboard->units().insert(u);
+                                        intrusive_ptr_add_ref(const unit* u) //这是计算指针的函数？？？
+                                        unit_map::umap_retval_pair_t unit_map::insert(unit_ptr p) //gdb中的函数名 unit_map::insert  ,map.cpp
+                                            if(!loc.valid())   //位置无效会返回失败，然后assert
+                                            std::pair<lmap::iterator, bool> linsert = lmap_.emplace(loc, uinsert.first); //此步骤可能失败
+                                    assert(success); //数据不正常，没有创建成功弄，会assert
+                    }
+            return true;
