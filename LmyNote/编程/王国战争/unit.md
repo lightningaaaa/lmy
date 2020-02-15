@@ -8,6 +8,9 @@ bool attack::perform_hit(bool attacker_turn, statistics::attack_context& stats)
         defender.get_unit().set_hitpoints(0);
     }
 
+2、单位图片所在位置
+\kingdom-res\app-kingdom\images\units\human
+
 2、城市作为unit的派生类
 D:\MyCode_ShareVm\War-Of-Kingdom\kingdom-src\kingdom\kingdom\artifical.hpp
 
