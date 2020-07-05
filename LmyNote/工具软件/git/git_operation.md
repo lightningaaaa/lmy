@@ -22,3 +22,7 @@ linux
 
 作者：网络中迷茫
 链接：https://www.jianshu.com/p/0b986acd0064
+
+3、追踪分支
+https://blog.csdn.net/qq_39940866/article/details/80320328
+git branch --set-upstream-to=origin/<branch> master
