@@ -4,6 +4,15 @@ hotkey::command_executor::do_execute_command // command_executor.cpp文件
 		recruit1();
 			playsingle_controller::hotkey_handler::recruit1
 				menu_handler::recruit1 //menu_events.cpp 文件
+  					std::set<std::string> recruits = actions::get_recruits(side_num, last_hex); //获取招募列表
+					for(const auto& recruit : recruits) {
+						const unit_type* type = unit_types.find(recruit);  //unit_types是对象，存所有单位类型？
+						sample_units.push_back(type);
+					}
+					gui2::dialogs::unit_recruit dlg(sample_units, board().get_team(side_num)); //征募列表对象
+					if(dlg.show()) {   //显示列表，并且等待用户选择
+						do_recruit1 //
+					}
 		break;
 
 
