@@ -12,6 +12,7 @@ hotkey::command_executor::do_execute_command // command_executor.cpp文件
 					gui2::dialogs::unit_recruit dlg(sample_units, board().get_team(side_num)); //征募列表对象
 					if(dlg.show()) {   //显示列表，并且等待用户选择
 						do_recruit1 //
+	  						city->troop_add_into
 					}
 		break;
 
