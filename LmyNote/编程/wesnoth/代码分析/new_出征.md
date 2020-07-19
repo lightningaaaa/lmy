@@ -26,13 +26,19 @@ unit_map是在set_recalling（进入出征态态）时用出征武将替换掉�
 move结束，unit_map在地图都市格子处留下原先都市cookie及容器中插入都市（为什么不是替换？原来位置是放置出征单位，已有效了，没必要替换）。set_recalling取消时，unit_map替换回都市格子处cookie及替换回容器中node*。
 
 3、王国战争的处理
-王国战争中出征的关键字Expedite
-menu_handler::expedite
+#if 0
+    王国战争中出征的关键字Expedite
+    menu_handler::expedite
 
-4、王国战争的出征处理？
-menu_handler::expedite(int side_num, const map_location &last_hex)
-    mouse_handler::set_expedite(artifical* expedite_city, unit& u)
-        gui().place_expedite_city(*expedite_city);
+    4、王国战争的出征处理？
+    menu_handler::expedite(int side_num, const map_location &last_hex)
+        mouse_handler::set_expedite(artifical* expedite_city, unit& u)
+            gui().place_expedite_city(*expedite_city);
+#endif
+
+4、王国战争到处理
+playsingle_controller::expedite()
+    menu_handler::expedite // == menu_handler_.expedite
 
 4、debug模式创建单位
 bool command_executor::run_queued_commands()
