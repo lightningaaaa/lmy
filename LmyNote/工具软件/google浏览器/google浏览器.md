@@ -4,3 +4,6 @@ https://zhidao.baidu.com/question/1436655238242744379.html
 
 2、谷歌黑色主题
 https://www.chromedownloads.net/extensions/780.html
+
+3、谷歌浏览器下载方法---知乎
+https://zhuanlan.zhihu.com/p/57152816
