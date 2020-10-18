@@ -1,0 +1,2 @@
+1、win+G键，然后点击小图钉可以固定在屏幕某个位置
+https://blog.csdn.net/zhuashuimu/article/details/103438771?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-1-103438771.nonecase&utm_term=win10%20%E6%82%AC%E6%B5%AE%E7%AA%97%20%E6%98%BE%E7%A4%BAcpu&spm=1000.2123.3001.4430
