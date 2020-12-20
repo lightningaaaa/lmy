@@ -1,3 +1,7 @@
+1\当前使用2012 professional版本
+安装时去掉微软word等开发工作支持。
+
+
 1\visual studio 2017正式版下载 v15.9.14 中文破解版(含密钥)  //貌似是假的
 https://www.cncrk.com/downinfo/274957.html
 
