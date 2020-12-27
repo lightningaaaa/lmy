@@ -162,7 +162,7 @@ HOTKEY_CITY_EXPEDITE,
 （5.3）按键是否有效的判断
 play_controller::hotkey_handler::can_execute_command
     case hotkey::HOTKEY_CITY_EXPEDITE:
-		return menu_handler_.current_unit()->is_city();
+		return menu_handler_.current_unit().valid() && menu_handler_.current_unit()->is_city();
 
 6、新增的出征处理函数
 menu_handler::expedite(int side_num, const map_location &last_hex) //在recruit函数中last_hex是鼠标最后所在位置，但新增的是初始值
