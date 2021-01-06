@@ -104,6 +104,9 @@ find_package(SDL2 REQUIRED)
 ${SDL2_INCLUDE_DIR}
 ${SDL2_LIBRARY}
 
+Cmake之深入理解find_package()的用法
+https://zhuanlan.zhihu.com/p/97369704?utm_source=wechat_session
+
 6、链接库
 find_library(TESTFUNC_LIB testFunc HINTS ${PROJECT_SOURCE_DIR}/testFunc/lib)
 add_executable (main ${SRC_LIST})
