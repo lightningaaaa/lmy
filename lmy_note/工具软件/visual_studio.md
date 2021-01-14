@@ -33,3 +33,11 @@ https://www.cnblogs.com/howDo/archive/2013/04/04/vs2012-key.html
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::MH2FR-BC9R2-84433-47M63-KQVWC
 - Microsoft Visual Studio Professional 2012 专业版 有效注册密钥：
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::4D974-9QX42-9Y43G-YJ7JG-JDYBP
+
+7、visual studio怎么显示行号
+https://jingyan.baidu.com/article/2f9b480de4e0b541ca6cc26b.html
+进行点击visual studio的菜单中的tools的选项菜单。
+弹出了下拉菜单中进行选中为“options”的选项菜单。
+进入到了options 的窗口界面中，进行选中为text editor的选项。
+进入到了text edtior的选项中，进行选中为all languages的选项。
+然后就会进入到了all languages的选项中。进行勾选上line numbers的选项。

@@ -8,6 +8,10 @@ https://blog.csdn.net/zhuiyunzhugang/article/details/88142908
 执行命令 cmake PATH 或者 ccmake PATH 生成 Makefile 1 1ccmake 和 cmake 的区别在于前者提供了一个交互式的界面。。其中， PATH 是 CMakeLists.txt 所在的目录。
 使用 make 命令进行编译。
 
+# 预编译宏
+https://blog.csdn.net/lxb00321/article/details/79816752?utm_source=blogxgwz1
+add_definitions(-D ANDROID)
+
 1、几个文件编译为可执行文件
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 2.8)
