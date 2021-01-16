@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 		exe_dir = get_exe_dir();
 #endif
 
-		if(!exe_dir.empty() && file_exists(exe_dir + "/data/_main.cfg")) {
+		if(!exe_dir.empty() && file_exists(exe_dir + "/data/_main.cfg")) { // kingdom-src\kingdom\librose\filesystem.cpp 中 file_exists
 			std::cerr << "Automatically found a possible data directory at "
 			          << exe_dir << '\n';
 			game_config::path = exe_dir;
