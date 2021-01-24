@@ -41,9 +41,11 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                         {
                             attack::perform_hit //actions.cpp：1704
                             {
+# 重要
                                 unit_display::unit_attack //unit_display.cpp:901
                                 {
                                     unit::take_hit //unit.hpp:430
+                                    { hit_points_ -= damage; return hit_points_ <= 0; }
                                 }
                             }
                         }
