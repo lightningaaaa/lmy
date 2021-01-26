@@ -44,6 +44,7 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
 # 重要
                                 unit_display::unit_attack //unit_display.cpp:901
                                 {
+                                    attacker.set_facing(a.get_relative_dir(b_vec[0])); //这是设置方向？
                                     unit::take_hit //unit.hpp:430
                                     { hit_points_ -= damage; return hit_points_ <= 0; }
                                 }
