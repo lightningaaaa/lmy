@@ -44,7 +44,15 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
 # 重要
                                 unit_display::unit_attack //unit_display.cpp:901
                                 {
-                                    attacker.set_facing(a.get_relative_dir(b_vec[0])); //这是设置方向？
+                                    attacker.set_facing(a.get_relative_dir(b_vec[0])); //获取相对方向，然后set
+                                    {//kingdom-src\kingdom\librose\base_unit.cpp:185
+                                    == base_unit::set_facing(map_location::DIRECTION dir) 
+                                        {//正北为0，顺时针旋转
+                                        //获取方向class base_unit类中facing() const { return facing_; }
+                                            if (dir != map_location::NDIRECTIONS)
+                                                facing_ = dir;
+                                        }
+                                    }
                                     unit::take_hit //unit.hpp:430
                                     { hit_points_ -= damage; return hit_points_ <= 0; }
                                 }
