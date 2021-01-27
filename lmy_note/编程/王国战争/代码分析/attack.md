@@ -27,13 +27,15 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
 	int attacker_weapon, int defender_weapon, rand_rng::seed_t seed) //mouse_events.cpp:1720
     {
         try
-            to_locs = attack_unit(attacker, defender, attacker_weapon, defender_weapon);//执行打击动作
-            == //F:\MyCode_ShareVm\War-Of-Kingdom\kingdom-src\kingdom\kingdom\actions.cpp：1358
+            to_locs = attack_unit(attacker, defender, attacker_weapon, defender_weapon);//一次打击attacker只有一个
+            == //\kingdom-src\kingdom\kingdom\actions.cpp：1358
             {
                 attack dummy(attacker, defender, attack_with, defend_with, update_display, duel, move, formation);
                 return dummy.perform();
                 == attack::perform() //actions.cpp：1816
                 {
+                    unit& attacker = a_.get_unit(); // 一次打击attacker只有一个
+	                unit& defender = d_.get_unit();
 # 重要
                     defender.hit_points_ //防御者血量
                     if (a_.n_attacks_ > 0 && !defender_strikes_first)
@@ -62,6 +64,10 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                 }
             }
     }
+
+2、
+(gdb) p attacker.loc_ //查看单位的位置
+(gdb) p attacker.facing_  //朝向
 
 2、血量变化的gdb
 (gdb) bt
