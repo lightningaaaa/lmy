@@ -1,5 +1,5 @@
 1、
-F:\MyCode_ShareVm\War-Of-Kingdom\kingdom-src\kingdom\kingdom\game.cpp
+F:\MyCode_ShareVm\War-Of-Kingdom\kingdom-src\kingdom\kingdom\game.cpp:1789
 int main(int argc, char** argv)
 	try {
 		std::cerr << "Battle for Wesnoth v" << game_config::version << '\n';
