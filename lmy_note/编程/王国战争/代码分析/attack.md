@@ -27,12 +27,12 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
 	int attacker_weapon, int defender_weapon, rand_rng::seed_t seed) //mouse_events.cpp:1720
     {
         try
-            to_locs = attack_unit(attacker, defender, attacker_weapon, defender_weapon);//一次打击attacker只有一个
-            == //\kingdom-src\kingdom\kingdom\actions.cpp：1358
+            to_locs = attack_unit(attacker, defender, attacker_weapon, defender_weapon);//一次打击attacker只有一个，执行完后，状态已经为“完”
+            == //\kingdom-src\kingdom\kingdom\actions.cpp：1362
             {
                 attack dummy(attacker, defender, attack_with, defend_with, update_display, duel, move, formation);
                 return dummy.perform();
-                == attack::perform() //actions.cpp：1816
+                == attack::perform() //actions.cpp：1862
                 {
                     unit& attacker = a_.get_unit(); // 一次打击attacker只有一个
 	                unit& defender = d_.get_unit();
@@ -40,9 +40,14 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                     const map_location& a = attacker.get_location();
                     const map_location& b = attacker.get_location();
                     attacker.set_real_facing(a.get_relative_dir(b));
-# 重要
+
                     defender.hit_points_ //防御者血量
-                    if (a_.n_attacks_ > 0 && !defender_strikes_first) //actions.cpp:2139，a_.n_attacks_会递减
+
+                    if (a_stats_->weapon)
+		                a_attackpoints_ = a_stats_->weapon->get_specials("attackpoints");//actions.cpp:2181
+# 重要攻击
+                    if (a_.n_attacks_ > 0 && !defender_strikes_first) //actions.cpp:2190，a_.n_attacks_会递减
+
 # 一次打击调用多次
 			            if (!perform_hit(true)) break; //actions.cpp：2145
                         {== attack::perform_hit //actions.cpp：1427 //一次打击调用多次
@@ -82,11 +87,33 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                 }
             }
     }
+# goto_main_context_menu 之前部队状态已经是“完”
+    gui_->goto_main_context_menu();//mouse_events.cpp:1363
 
 2、
 (gdb) p attacker.loc_ //查看单位的位置
 (gdb) p attacker.facing_  //朝向
 (gdb) p def_ptr_vec[0]->hit_points_
+
+3、设置完成状态？？？
+(gdb) 
+battle_context::unit_stats::unit_stats (this=0x55555b788e20, 
+    u=<optimized out>, u_loc=..., u_attack_num=0, attacking=false, opp=..., 
+    opp_loc=..., opp_weapon=0x5555571f00c0, units=...)
+    at /mnt/hgfs/MyCode_ShareVm/war_of_kingdom_linux/kingdom-src/kingdom/kingdom/actions.cpp:743
+743			unit_abilities::effect dmg_effect(dmg_specials, base_damage, backstab_pos);
+(gdb) 
+
+867
+
+#class unit的如下成员？？？表示移动力
+	int total_movement() const { return max_movement_; }
+	int movement_left() const { return (movement_ == 0 || incapacitated()) ? 0 : movement_; }
+	void set_movement(int moves);
+
+
+a_.get_unit().set_movement(a_.get_unit().movement_left() - a_.get_unit().attacks()[a_.weapon_].movement_used());//actions.cpp:1892
+
 
 2、血量变化的gdb
 (gdb) bt
