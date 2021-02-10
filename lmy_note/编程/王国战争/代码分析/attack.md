@@ -41,6 +41,8 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                     const map_location& b = attacker.get_location();
                     attacker.set_real_facing(a.get_relative_dir(b));
 
+                    a_.get_unit().set_movement(a_.get_unit().movement_left() - a_.get_unit().attacks()[a_.weapon_].movement_used());//actions.cpp:1892
+
                     defender.hit_points_ //防御者血量
 
                     if (a_stats_->weapon)
@@ -94,6 +96,9 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
 (gdb) p attacker.loc_ //查看单位的位置
 (gdb) p attacker.facing_  //朝向
 (gdb) p def_ptr_vec[0]->hit_points_
+(gdb) p attacker.max_movement_
+(gdb) p attacker.movement_
+
 
 3、设置完成状态？？？
 (gdb) 
@@ -114,6 +119,9 @@ battle_context::unit_stats::unit_stats (this=0x55555b788e20,
 
 a_.get_unit().set_movement(a_.get_unit().movement_left() - a_.get_unit().attacks()[a_.weapon_].movement_used());//actions.cpp:1892
 
+
+class unit中
+bool has_moved() const { return movement_left() != total_movement(); }
 
 2、血量变化的gdb
 (gdb) bt
