@@ -41,6 +41,7 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                     const map_location& b = attacker.get_location();
                     attacker.set_real_facing(a.get_relative_dir(b));
 
+# 攻击时消耗移动力
                     a_.get_unit().set_movement(a_.get_unit().movement_left() - a_.get_unit().attacks()[a_.weapon_].movement_used());//actions.cpp:1892
 
                     defender.hit_points_ //防御者血量

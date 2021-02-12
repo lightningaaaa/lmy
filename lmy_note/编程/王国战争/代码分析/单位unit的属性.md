@@ -1,6 +1,7 @@
 1、
 (gdb) p attacker.max_movement_
 (gdb) p attacker.movement_
+attacks_left_
 (gdb) p attacker.unit_type_
 (gdb) p attacker.unit_type_->type_name_
 image_ = "units/human/horseman3-defend-miss.png"
