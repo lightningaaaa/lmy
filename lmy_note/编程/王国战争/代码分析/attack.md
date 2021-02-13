@@ -1,3 +1,6 @@
+1、某些单位的attack不能真正使用，因为如下属性设置为0
+attack_weight = 0.0
+
 1、
 mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location& target_loc) //kingdom-src\kingdom\kingdom\mouse_events.cpp:1279
     dlg.show(resources::screen->video()); //mouse_events.cpp:1327
