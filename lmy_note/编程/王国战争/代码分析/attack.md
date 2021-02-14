@@ -39,6 +39,7 @@ mouse_handler::attack_enemy_(unit& attacker, unit& defender, const map_location&
                 {
                     unit& attacker = a_.get_unit(); // 一次打击attacker只有一个
 	                unit& defender = d_.get_unit();
+# b actions.cpp:1871
 # 新增real_facing处理
                     const map_location& a = attacker.get_location();
                     const map_location& b = attacker.get_location();

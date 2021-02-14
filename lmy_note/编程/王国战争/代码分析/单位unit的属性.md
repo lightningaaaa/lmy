@@ -12,6 +12,9 @@ $8 = "melee"
 $9 = "impact"
 (gdb) 
 
+# 经验
+p attacker.experience_
+p attacker.max_experience_
 
 2、
 (gdb) p attacker.loc_ //查看单位的位置
