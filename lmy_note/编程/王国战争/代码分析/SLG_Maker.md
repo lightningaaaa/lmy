@@ -9,3 +9,13 @@
  	editor.exe!title_select(do_action_t da) 行 250	C++
  	editor.exe!On_DlgDDescNotify(HWND__ * hdlgP, int DlgItem, tagNMHDR * lpNMHdr) 行 615	C++
  	editor.exe!DlgDDescProc(HWND__ * hdlgP, unsigned int uMsg, unsigned int wParam, long lParam) 行 687	C++
+
+
+2、
+void update_locale_dir()//
+	wml_config_from_file(game_config::path + "/xwml/data.bin", editor_config::data_cfg);//kingdom-src\kingdom\kingdom\editor2\main.cpp:1342
+
+
+3、
+WinMain(HINSTANCE inst, HINSTANCE, LPSTR lpCmdLine, int nCmdShow)
+    wml_config_from_file(game_config::path + "/xwml/data.bin", editor_config::data_cfg);//main.cpp:1467
